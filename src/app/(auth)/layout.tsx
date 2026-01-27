@@ -1,9 +1,5 @@
-import { getCurrentUser } from '@/services/supabase/lib/getCurrentUser';
-import { redirect } from 'next/navigation';
-
 export default async function AuthLayout({ children }: { children: React.ReactNode }) {
-    const user = await getCurrentUser();
-    if (user?.id) return redirect('/');
+    //@ TODO: SET UP USER CHECK TO PREVENT AUTHED USERS FROM SEEING AUTH PAGES
     
     return (
         <div className='flex flex-col w-screen h-screen'>
