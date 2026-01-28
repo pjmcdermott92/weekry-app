@@ -7,7 +7,9 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { logoutUser } from '@/services/supabase/actions/auth';
 import { ChevronUpIcon, LogOut, User2Icon } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 export function UserMenu({
     open,
@@ -16,6 +18,12 @@ export function UserMenu({
     open: boolean;
     onOpenChange: (open: boolean) => void;
 }) {
+    const router = useRouter();
+    const logout = async () => {
+        await logoutUser();
+        router.push('/login');
+    };
+
     return (
         <DropdownMenu open={open} onOpenChange={onOpenChange}>
             <DropdownMenuTrigger className='outline-0 flex gap-2'>
@@ -31,7 +39,7 @@ export function UserMenu({
                     <User2Icon />
                     Profile
                 </DropdownMenuItem>
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={logout}>
                     <LogOut />
                     Log Out
                 </DropdownMenuItem>
